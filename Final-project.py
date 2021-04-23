@@ -82,15 +82,21 @@ class main:
 
 		# defining resampled image path
 		resampled_image_path = os.path.join(os.getcwd(),"Resampled_images")
+		try:
+			os.mkdir(resampled_image_path)
+			print("Resampled_images directory created")
+		except FileExistsError:
+			print("directory already exists")
 		# segment and resampling all the images
+		print("starting image segmentation")
 		for i in self.iterateMovingImages():
-			image_path = resampled_image_path+"\\resampled"+i[93:96]+".png"
+			image_path = resampled_image_path+"\\resampled"+i[-7:-4]+".png"
 			sitk.WriteImage(sitk.Cast(sitk.RescaleIntensity(self.segmentImage(i, self.fixed_image_path)), sitk.sitkUInt8), image_path)
 		return None
 
 	# generates video from a series of images (.png/.jpg/.jpeg)
 	def generateVideo(self):
-		
+		print("generating video from resampled images")
 		# for storing all the images
 		img_array = list()
 		# iterate through the images and store it to an array
@@ -101,7 +107,7 @@ class main:
 		    img_array.append(img)
 		# stacking the images together and writing it as a video
 		# here 8 is the fps--  you can change the fps as you like
-		out = cv2.VideoWriter('final-project.avi',cv2.VideoWriter_fourcc(*'DIVX'), 8, size)
+		out = cv2.VideoWriter('final-project.mp4',cv2.VideoWriter_fourcc(*'mp4v'), 8, size)
 		for i in range(len(img_array)):
 		    out.write(img_array[i])
 		out.release()
@@ -110,4 +116,6 @@ class main:
 
 if __name__ == '__main__':
 	a = main()
+	# a = 'musabbir'
+	# print(a[-5:-2])
 
