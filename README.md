@@ -12,3 +12,7 @@ You are expected to:
   o The region of interest is tracked on each ‘cine’ image
   o A video (.avi or .mp4) is generated. The video should display the segmentation of the region of interest on each cine image, as shown during Lecture 8
 - (30 points) Write a 1 page paper (pdf file) with the following sections: introduction, methods, results, discussion
+
+**Solution:**
+
+Running Final-project.py script will segment and resample all the moving images and store them to a directory called Resampled_images. Then it will collect all the resamlped images and stack them together to form a .mp4 video file. 
